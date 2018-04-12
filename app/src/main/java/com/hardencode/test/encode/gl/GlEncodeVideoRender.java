@@ -51,16 +51,16 @@ public class GlEncodeVideoRender implements GlRender{
     };
 
     private float[] texCoord = new float[]{
-            0.0f, 0.0f,
-            0.0f, 1.0f,
-            1.0f, 0.0f,
-            1.0f, 1.0f
-
-
-//            0.0f, 1.0f,
-//            1.0f, 1.0f,
 //            0.0f, 0.0f,
-//            1.0f, 0.0f
+//            0.0f, 1.0f,
+//            1.0f, 0.0f,
+//            1.0f, 1.0f
+
+
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            0.0f, 0.0f,
+            1.0f, 0.0f
     };
 
     public void onSurfaceCreated(EGLConfig config) {

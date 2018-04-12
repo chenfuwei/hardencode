@@ -94,8 +94,6 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
         viewHeight = height;
         videoRender.onSurfaceChanged(gl, width, height);
         video2Render.onSurfaceChanged(gl, width, height);
-
-        glViewRender.onSurfaceChanged(width, height);
     }
 
     @Override

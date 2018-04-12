@@ -152,11 +152,11 @@ public class GlVideoRender{
         GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, mTexId);
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
 
-//        IntBuffer ib = IntBuffer.allocate(frameHeight * frameWidth);
-//        GLES20.glReadPixels(0, 0, frameWidth, frameHeight, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, ib);
-//                      Bitmap result = Bitmap.createBitmap(frameWidth, frameHeight, Bitmap.Config.ARGB_8888);
-//              result.copyPixelsFromBuffer(ib);
-//              saveBitmap(result);
+        IntBuffer ib = IntBuffer.allocate(frameHeight * frameWidth);
+        GLES20.glReadPixels(0, 0, frameWidth, frameHeight, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, ib);
+                      Bitmap result = Bitmap.createBitmap(frameWidth, frameHeight, Bitmap.Config.ARGB_8888);
+              result.copyPixelsFromBuffer(ib);
+              saveBitmap(result);
         GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, 0);
         GLES20.glDisableVertexAttribArray(aPosition);
         GLES20.glDisableVertexAttribArray(aTexCoord);
@@ -205,7 +205,7 @@ public class GlVideoRender{
     }
 
     public static String saveBitmap(Bitmap bitmap) {
-        File fileRoot = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/yyy/");
+        File fileRoot = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/rrr/");
         if(!fileRoot.exists())
         {
             fileRoot.mkdirs();
