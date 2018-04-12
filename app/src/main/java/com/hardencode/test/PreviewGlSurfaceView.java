@@ -12,6 +12,7 @@ import android.util.Log;
 import com.hardencode.test.encode.ViEncode;
 import com.hardencode.test.encode.gl.CustomGlViewRender;
 import com.hardencode.test.encode.gl.GlEncodeVideoRender;
+import com.hardencode.test.filter.BaseFilter;
 
 import javax.microedition.khronos.egl.EGL;
 import javax.microedition.khronos.egl.EGL10;
@@ -24,14 +25,13 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
     private SurfaceTexture surfaceTexture;
     private int textId;
 
-    private GlVideoRender videoRender;  //用于纹理拷贝，用于将OES纹理转换为普通纹理
-    private Gl2VideoRender video2Render; //用于本地画面显示
+    private CameraInputFilter videoRender;  //用于纹理拷贝，用于将OES纹理转换为普通纹理
+    private BaseFilter video2Render; //用于本地画面显示
 
     private CustomGlViewRender glViewRender;   //构造GL线程，用于更新编码器的Surface用于录制
     private GlEncodeVideoRender encodeVideoRender; //渲染编码器的surface
     private ViEncode viEncode;  //编码器
 
-    private int viewWidth, viewHeight;
     public PreviewGlSurfaceView(Context context) {
         this(context, null);
     }
@@ -61,8 +61,8 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        videoRender = new GlVideoRender();
-        video2Render = new Gl2VideoRender();
+        videoRender = new CameraInputFilter();
+        video2Render = new BaseFilter();
         int[] textures = new int[1];
         GLES20.glGenTextures(1, textures, 0);
         textId = textures[0];
@@ -79,8 +79,8 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
         cameraPreview.setSurfaceTexture(surfaceTexture);
         cameraPreview.startPreview(getContext());
 
-        videoRender.onSurfaceCreated(gl, config);
-        video2Render.onSurfaceCreated(gl, config);
+        videoRender.onInit();
+        video2Render.onInit();
 
         videoRender.initFrameBuffer(320, 240);
 
@@ -90,10 +90,9 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
-        viewWidth = width;
-        viewHeight = height;
-        videoRender.onSurfaceChanged(gl, width, height);
-        video2Render.onSurfaceChanged(gl, width, height);
+        GLES20.glViewport(0,0,width, height);
+        videoRender.onInputChange(width, height);
+        video2Render.onInputChange(width, height);
     }
 
     @Override
@@ -106,7 +105,6 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
         }
         int id = textId;
         id = videoRender.onDrawToTexture(textId);
-        GLES20.glViewport(0, 0, viewWidth, viewHeight);
         video2Render.onDrawFrame(gl, id);
 
 
