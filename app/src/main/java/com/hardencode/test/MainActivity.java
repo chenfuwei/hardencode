@@ -28,12 +28,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                test();
+               // test();
             }
         });
     }
 
-    private void test()
-    {
+    @Override
+    protected void onDestroy() {
+        previewGlSurfaceView.onDestroy();
+        super.onDestroy();
     }
 }

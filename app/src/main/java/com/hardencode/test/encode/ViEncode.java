@@ -2,6 +2,7 @@ package com.hardencode.test.encode;
 
 import android.media.MediaCodec;
 import android.media.MediaFormat;
+import android.media.MediaMuxer;
 import android.util.Log;
 import android.view.Surface;
 
@@ -18,14 +19,21 @@ public class ViEncode {
     private static final String TYPE = "video/avc";
 
     private MediaCodec mediaCodec;
-
     private int width, height;
-
     private Surface encodeSurface;
+
+    private MediaMuxer mediaMuxer;
+    private int writeVideoTrackIndex = -1;
 
     public void initEncoder()
     {
         try {
+            File file = new File("/sdcard/test.mp4");
+            if(file.exists())
+            {
+                file.delete();
+            }
+            mediaMuxer = new MediaMuxer("/sdcard/test.mp4", MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
             initFile();
         }catch (Exception e)
         {
@@ -77,20 +85,42 @@ public class ViEncode {
         {
             Log.i(TAG, "outputIndex = " + outputIndex);
             ByteBuffer buffer = mediaCodec.getOutputBuffer(outputIndex);
-            byte[] tmp = new byte[bufferInfo.size];
-            buffer.get(tmp);
 
-			try {
-				stream.write(tmp);
-			}catch (Exception e)
-			{
-				e.printStackTrace();
-			}
+            if(writeVideoTrackIndex < 0)
+            {
+                writeVideoTrackIndex = mediaMuxer.addTrack(mediaCodec.getOutputFormat());
+                mediaMuxer.start();
+            }
+
+            if(writeVideoTrackIndex < 0)
+            {
+                Log.e(TAG, "writeVideoTrackIndex = " + writeVideoTrackIndex);
+            }
+            mediaMuxer.writeSampleData(writeVideoTrackIndex, buffer, bufferInfo);
+//            byte[] tmp = new byte[bufferInfo.size];
+//            buffer.get(tmp);
+//
+//			try {
+//				stream.write(tmp);
+//			}catch (Exception e)
+//			{
+//				e.printStackTrace();
+//			}
             mediaCodec.releaseOutputBuffer(outputIndex, false);
             outputIndex = mediaCodec.dequeueOutputBuffer(bufferInfo, 0);
         }
     }
 
+
+    public void release()
+    {
+        if(writeVideoTrackIndex >= 0)
+        {
+            mediaMuxer.stop();
+            mediaMuxer.release();
+            writeVideoTrackIndex = -1;
+        }
+    }
 
     private FileOutputStream stream = null;
     private void initFile() throws IOException {

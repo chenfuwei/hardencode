@@ -105,12 +105,17 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
             e.printStackTrace();
         }
         int id = textId;
-        id = videoRender.onDrawToTexture(textId);
+        id = videoRender.onDrawToTexture(id);
         video2Render.onDrawFrame(gl, id);
 
 
         glViewRender.setmTexId(id);
         glViewRender.requestRender();
         viEncode.getH264Data();
+    }
+
+    public void onDestroy()
+    {
+        viEncode.release();
     }
 }
