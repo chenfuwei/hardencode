@@ -9,6 +9,7 @@ import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import com.hardencode.test.config.Config;
 import com.hardencode.test.encode.ViEncode;
 import com.hardencode.test.encode.gl.CustomGlViewRender;
 import com.hardencode.test.encode.gl.GlEncodeVideoRender;
@@ -44,8 +45,8 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
         cameraPreview = new CameraPreview();
 
         viEncode = new ViEncode();
-        viEncode.setWidth(320);
-        viEncode.setHeight(240);
+        viEncode.setWidth(Config.VIDEO_WIDTH);
+        viEncode.setHeight(Config.VIDEO_HEIGHT);
         viEncode.initEncoder();
         glViewRender = new CustomGlViewRender();
         encodeVideoRender = new GlEncodeVideoRender();
@@ -82,10 +83,10 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
         videoRender.onInit();
         video2Render.onInit();
 
-        videoRender.initFrameBuffer(320, 240);
+        videoRender.initFrameBuffer(Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
 
         glViewRender.setShareEGLContext(EGL14.eglGetCurrentContext());
-        glViewRender.onSurfaceCreated(viEncode.getEncodeSurface(), 320, 240);
+        glViewRender.onSurfaceCreated(viEncode.getEncodeSurface(), Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
     }
 
     @Override
