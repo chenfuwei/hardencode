@@ -1,7 +1,7 @@
 package com.hardencode.test.filter;
 
 public enum ImageFilter {
-    DEFAULT(0), BRIGHTNESS(1);
+    DEFAULT(0), BRIGHTNESS(1), CONTRAST(2);
 
     private int value;
 

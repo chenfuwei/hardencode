@@ -26,6 +26,6 @@
         android:min="0"
         android:max="100"
         android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp" />
 
 </RelativeLayout>

@@ -101,7 +101,7 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
         glViewRender.setShareEGLContext(EGL14.eglGetCurrentContext());
         glViewRender.onSurfaceCreated(viEncode.getEncodeSurface(), Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
 
-        baseImageFilter = factory.getImageFilter(ImageFilter.BRIGHTNESS, getContext());
+        baseImageFilter = factory.getImageFilter(ImageFilter.CONTRAST, getContext());
         baseImageFilter.onInputImageSizeChange(Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
     }
 
@@ -144,11 +144,11 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
         viEncode.release();
     }
 
-    public void setProgressValue(int value)
+    public void setProgressValue(float percent)
     {
         if(null != baseImageFilter)
         {
-            baseImageFilter.setProgressValue(value);
+            baseImageFilter.setProgressValue(percent);
         }
     }
 }

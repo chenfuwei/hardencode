@@ -24,8 +24,8 @@ public class BrightnessImageFilter extends BaseImageFilter {
     }
 
     @Override
-    public void setProgressValue(int nProgress) {
-        nBrightness = (float)nProgress / 100 * 2;
+    public void setProgressValue(float percent) {
+        nBrightness = percent * 2;
         runOnDraw(new Runnable() {
             @Override
             public void run() {

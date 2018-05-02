@@ -64,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void processSeekBarValue(int progress)
     {
-        previewGlSurfaceView.setProgressValue(progress);
-        Log.i("progress","progress = " + progress);
+        float setProgress = (float)(progress / 100.0);
+        previewGlSurfaceView.setProgressValue(setProgress);
+        Log.i("progress","setProgress = " + setProgress);
     }
 }

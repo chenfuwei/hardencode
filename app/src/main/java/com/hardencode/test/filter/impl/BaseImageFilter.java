@@ -189,7 +189,7 @@ public class BaseImageFilter {
         //子类实现
     }
 
-    public void setProgressValue(int nProgress)
+    public void setProgressValue(float percent)
     {
 
     }
