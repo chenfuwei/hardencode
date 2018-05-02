@@ -1,15 +1,16 @@
 package com.hardencode.test.filter;
 
 public enum ImageFilter {
-    DEFAULT(0), BRIGHTNESS(1), CONTRAST(2), GAMMA(3);
+    DEFAULT("default"), BRIGHTNESS("brightness"), CONTRAST("contrast"), GAMMA("gamma"),
+    HUE("hue");
 
-    private int value;
+    private String value;
 
-    ImageFilter(int value) {
+    ImageFilter(String value) {
         this.value = value;
     }
 
-    public int getValue()
+    public String getValue()
     {
         return value;
     }

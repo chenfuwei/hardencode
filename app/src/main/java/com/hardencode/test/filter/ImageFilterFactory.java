@@ -6,6 +6,7 @@ import com.hardencode.test.filter.impl.BaseImageFilter;
 import com.hardencode.test.filter.impl.BrightnessImageFilter;
 import com.hardencode.test.filter.impl.ContrastImageFilter;
 import com.hardencode.test.filter.impl.GammaImageFilter;
+import com.hardencode.test.filter.impl.HueImageFilter;
 
 public class ImageFilterFactory {
     public BaseImageFilter getImageFilter(ImageFilter imageFilter, Context mContext)
@@ -17,6 +18,8 @@ public class ImageFilterFactory {
             return new ContrastImageFilter(mContext);
         }else if(imageFilter == ImageFilter.GAMMA){
             return new GammaImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.HUE){
+            return new HueImageFilter(mContext);
         }else
         {
             return new BaseImageFilter(mContext);
