@@ -5,8 +5,10 @@ import android.media.MediaRecorder;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.QuickContactBadge;
+import android.widget.SeekBar;
 
 import com.hardencode.test.permission.PermissionsHelper;
 
@@ -14,6 +16,8 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     private PreviewGlSurfaceView previewGlSurfaceView;
+
+    private SeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +35,36 @@ public class MainActivity extends AppCompatActivity {
                // test();
             }
         });
+
+
+        seekBar = findViewById(R.id.seekBar);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                processSeekBarValue(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     @Override
     protected void onDestroy() {
         previewGlSurfaceView.onDestroy();
         super.onDestroy();
+    }
+
+    private void processSeekBarValue(int progress)
+    {
+        previewGlSurfaceView.setProgressValue(progress);
+        Log.i("progress","progress = " + progress);
     }
 }

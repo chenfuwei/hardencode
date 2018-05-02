@@ -14,6 +14,12 @@ import com.hardencode.test.encode.ViEncode;
 import com.hardencode.test.encode.gl.CustomGlViewRender;
 import com.hardencode.test.encode.gl.GlEncodeVideoRender;
 import com.hardencode.test.filter.BaseFilter;
+import com.hardencode.test.filter.ImageFilter;
+import com.hardencode.test.filter.ImageFilterFactory;
+import com.hardencode.test.filter.OptionGlUtils;
+import com.hardencode.test.filter.impl.BaseImageFilter;
+
+import java.nio.ByteBuffer;
 
 import javax.microedition.khronos.egl.EGL;
 import javax.microedition.khronos.egl.EGL10;
@@ -33,6 +39,11 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
     private GlEncodeVideoRender encodeVideoRender; //渲染编码器的surface
     private ViEncode viEncode;  //编码器
 
+    private int viewWidth, viewHeight;
+
+    private ImageFilterFactory factory;
+    private BaseImageFilter baseImageFilter;
+
     public PreviewGlSurfaceView(Context context) {
         this(context, null);
     }
@@ -51,6 +62,8 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
         glViewRender = new CustomGlViewRender();
         encodeVideoRender = new GlEncodeVideoRender();
         glViewRender.setGlRender(encodeVideoRender);
+
+        factory = new ImageFilterFactory();
     }
 
     private SurfaceTexture.OnFrameAvailableListener onFrameAvailableListener = new SurfaceTexture.OnFrameAvailableListener() {
@@ -87,13 +100,20 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
 
         glViewRender.setShareEGLContext(EGL14.eglGetCurrentContext());
         glViewRender.onSurfaceCreated(viEncode.getEncodeSurface(), Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
+
+        baseImageFilter = factory.getImageFilter(ImageFilter.BRIGHTNESS, getContext());
+        baseImageFilter.onInputImageSizeChange(Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
     }
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
+        viewWidth = width;
+        viewHeight = height;
         GLES20.glViewport(0,0,width, height);
         videoRender.onInputChange(width, height);
         video2Render.onInputChange(width, height);
+
+        baseImageFilter.onOutputSizeChange(width, height);
     }
 
     @Override
@@ -106,7 +126,12 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
         }
         int id = textId;
         id = videoRender.onDrawToTexture(id);
-        video2Render.onDrawFrame(gl, id);
+        id =  baseImageFilter.onDrawFrameToTexture(id);
+        GLES20.glViewport(0, 0, viewWidth, viewHeight);
+
+        ByteBuffer vertexBuffer = OptionGlUtils.getDatasByteBuffer(OptionGlUtils.vertexs);
+        ByteBuffer coordBuffer = OptionGlUtils.getDatasByteBuffer(OptionGlUtils.coordRotation90);
+        baseImageFilter.onDrawFrame(id,vertexBuffer,coordBuffer);
 
 
         glViewRender.setmTexId(id);
@@ -117,5 +142,13 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
     public void onDestroy()
     {
         viEncode.release();
+    }
+
+    public void setProgressValue(int value)
+    {
+        if(null != baseImageFilter)
+        {
+            baseImageFilter.setProgressValue(value);
+        }
     }
 }
