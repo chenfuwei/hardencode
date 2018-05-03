@@ -4,9 +4,11 @@ import android.content.Context;
 
 import com.hardencode.test.filter.impl.BaseImageFilter;
 import com.hardencode.test.filter.impl.BrightnessImageFilter;
+import com.hardencode.test.filter.impl.colormatrix.ColorMatrixImageFilter;
 import com.hardencode.test.filter.impl.ContrastImageFilter;
 import com.hardencode.test.filter.impl.GammaImageFilter;
 import com.hardencode.test.filter.impl.HueImageFilter;
+import com.hardencode.test.filter.impl.colormatrix.SepiaImageFilter;
 
 public class ImageFilterFactory {
     public BaseImageFilter getImageFilter(ImageFilter imageFilter, Context mContext)
@@ -20,6 +22,10 @@ public class ImageFilterFactory {
             return new GammaImageFilter(mContext);
         }else if(imageFilter == ImageFilter.HUE){
             return new HueImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.COLORMATRIX){
+            return new ColorMatrixImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.SEPIAL){
+            return new SepiaImageFilter(mContext);
         }else
         {
             return new BaseImageFilter(mContext);

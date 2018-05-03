@@ -2,7 +2,7 @@ package com.hardencode.test.filter;
 
 public enum ImageFilter {
     DEFAULT("default"), BRIGHTNESS("brightness"), CONTRAST("contrast"), GAMMA("gamma"),
-    HUE("hue");
+    HUE("hue"), COLORMATRIX("colormatrix"), SEPIAL("sepial");
 
     private String value;
 
