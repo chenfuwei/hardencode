@@ -5,6 +5,7 @@ import android.content.Context;
 import com.hardencode.test.filter.impl.BaseImageFilter;
 import com.hardencode.test.filter.impl.BrightnessImageFilter;
 import com.hardencode.test.filter.impl.GrayScaleImageFilter;
+import com.hardencode.test.filter.impl.SwirlImageFilter;
 import com.hardencode.test.filter.impl.colormatrix.ColorMatrixImageFilter;
 import com.hardencode.test.filter.impl.ContrastImageFilter;
 import com.hardencode.test.filter.impl.GammaImageFilter;
@@ -29,6 +30,8 @@ public class ImageFilterFactory {
             return new SepiaImageFilter(mContext);
         }else if(imageFilter == ImageFilter.GRAYSCALE){
             return new GrayScaleImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.SWIRL){
+            return new SwirlImageFilter(mContext);
         }else
         {
             return new BaseImageFilter(mContext);
