@@ -121,6 +121,8 @@ public class BaseImageFilter {
 
     public int onDrawFrame(int glTexture, ByteBuffer vertexBuffer, ByteBuffer coordBuffer)
     {
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         GLES20.glUseProgram(mProgram);
 
         GLES20.glEnableVertexAttribArray(aPosition);
