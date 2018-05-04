@@ -3,7 +3,7 @@ package com.hardencode.test.filter;
 public enum ImageFilter {
     DEFAULT("default"), BRIGHTNESS("brightness"), CONTRAST("contrast"), GAMMA("gamma"),
     HUE("hue"), COLORMATRIX("colormatrix"), SEPIAL("sepial"), GRAYSCALE("grayscale"),
-    SWIRL("Swirl"), WHITEBALANCE("wihtebalance");
+    SWIRL("Swirl"), WHITEBALANCE("wihtebalance"), BULGE("bulge distortion");
 
     private String value;
 

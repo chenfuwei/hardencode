@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.hardencode.test.filter.impl.BaseImageFilter;
 import com.hardencode.test.filter.impl.BrightnessImageFilter;
+import com.hardencode.test.filter.impl.BulgeDistortionImageFilter;
 import com.hardencode.test.filter.impl.GrayScaleImageFilter;
 import com.hardencode.test.filter.impl.SwirlImageFilter;
 import com.hardencode.test.filter.impl.WhiteBalanceImageFilter;
@@ -35,6 +36,8 @@ public class ImageFilterFactory {
             return new SwirlImageFilter(mContext);
         }else if(imageFilter == ImageFilter.WHITEBALANCE){
             return new WhiteBalanceImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.BULGE) {
+            return new BulgeDistortionImageFilter(mContext);
         }else
         {
             return new BaseImageFilter(mContext);

@@ -26,8 +26,8 @@ public class BaseImageFilter {
     private int nInputImageWidth;
     private int nInputImageHeight;
 
-    private int nOutputWidth;
-    private int nOutputHeight;
+    protected int nOutputWidth;
+    protected int nOutputHeight;
 
     private int saveTextureId;
     private int saveFrameBufferId;
