@@ -8,6 +8,7 @@ import com.hardencode.test.filter.impl.BulgeDistortionImageFilter;
 import com.hardencode.test.filter.impl.CGAColorSpaceImageFilter;
 import com.hardencode.test.filter.impl.GrayScaleImageFilter;
 import com.hardencode.test.filter.impl.SwirlImageFilter;
+import com.hardencode.test.filter.impl.VignetteImageFilter;
 import com.hardencode.test.filter.impl.WhiteBalanceImageFilter;
 import com.hardencode.test.filter.impl.colormatrix.ColorMatrixImageFilter;
 import com.hardencode.test.filter.impl.ContrastImageFilter;
@@ -41,6 +42,8 @@ public class ImageFilterFactory {
             return new BulgeDistortionImageFilter(mContext);
         }else if(imageFilter == ImageFilter.CGACOLOR){
             return new CGAColorSpaceImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.VIGNETTE){
+            return new VignetteImageFilter(mContext);
         }else
         {
             return new BaseImageFilter(mContext);
