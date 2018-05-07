@@ -7,6 +7,7 @@ import com.hardencode.test.filter.impl.BrightnessImageFilter;
 import com.hardencode.test.filter.impl.BulgeDistortionImageFilter;
 import com.hardencode.test.filter.impl.CGAColorSpaceImageFilter;
 import com.hardencode.test.filter.impl.GrayScaleImageFilter;
+import com.hardencode.test.filter.impl.SphereRefractionImageFilter;
 import com.hardencode.test.filter.impl.SwirlImageFilter;
 import com.hardencode.test.filter.impl.TransformImageFilter;
 import com.hardencode.test.filter.impl.VignetteImageFilter;
@@ -47,7 +48,8 @@ public class ImageFilterFactory {
             return new VignetteImageFilter(mContext);
         }else if(imageFilter == ImageFilter.TRANSFORM){
             return new TransformImageFilter(mContext);
-
+        }else if(imageFilter == ImageFilter.SPHEREFRACTION){
+            return new SphereRefractionImageFilter(mContext);
         }else
         {
             return new BaseImageFilter(mContext);
