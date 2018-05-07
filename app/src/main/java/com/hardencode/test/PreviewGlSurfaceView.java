@@ -101,7 +101,7 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
         glViewRender.setShareEGLContext(EGL14.eglGetCurrentContext());
         glViewRender.onSurfaceCreated(viEncode.getEncodeSurface(), Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
 
-        baseImageFilter = factory.getImageFilter(ImageFilter.SPHEREFRACTION, getContext());
+        baseImageFilter = factory.getImageFilter(ImageFilter.SHARPNESS, getContext());
 
         baseImageFilter.onInputImageSizeChange(Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
     }
