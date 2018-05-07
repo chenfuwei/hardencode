@@ -1,12 +1,16 @@
 package com.hardencode.test.filter;
 
 import android.content.Context;
+import android.media.Image;
 
 import com.hardencode.test.filter.impl.BaseImageFilter;
 import com.hardencode.test.filter.impl.BrightnessImageFilter;
 import com.hardencode.test.filter.impl.BulgeDistortionImageFilter;
 import com.hardencode.test.filter.impl.CGAColorSpaceImageFilter;
 import com.hardencode.test.filter.impl.GrayScaleImageFilter;
+import com.hardencode.test.filter.impl.KuwaharaImageFilter;
+import com.hardencode.test.filter.impl.OpacityImageFilter;
+import com.hardencode.test.filter.impl.PosterizeImageFilter;
 import com.hardencode.test.filter.impl.SharpnessImageFilter;
 import com.hardencode.test.filter.impl.SphereRefractionImageFilter;
 import com.hardencode.test.filter.impl.SwirlImageFilter;
@@ -53,7 +57,14 @@ public class ImageFilterFactory {
             return new SphereRefractionImageFilter(mContext);
         }else if(imageFilter == ImageFilter.SHARPNESS){
             return new SharpnessImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.POSTERIZE){
+            return new PosterizeImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.OPACITY){
+            return new OpacityImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.KUWAHARA){
+            return new KuwaharaImageFilter(mContext);
         }else
+
         {
             return new BaseImageFilter(mContext);
         }
