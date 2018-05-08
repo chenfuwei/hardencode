@@ -105,8 +105,9 @@ public class BaseImageFilter {
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
-        onDrawFramePre();
+
         runOnDrawTask();
+        onDrawFramePre();
 
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP,0,4);
 

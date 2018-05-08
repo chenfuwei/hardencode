@@ -32,10 +32,10 @@ public class OptionGlUtils {
     };
 
     public static float[] coordRotation270 = new float[]{
-            1.1f, 1.1f,
+            1.0f, 1.0f,
             1.0f, 0.0f,
-            0.0f, 0.0f,
-            0.0f, 1.0f
+            0.0f, 1.0f,
+            0.0f, 0.0f
     };
 
     public static ByteBuffer getDatasByteBuffer(float[] vertexs)
