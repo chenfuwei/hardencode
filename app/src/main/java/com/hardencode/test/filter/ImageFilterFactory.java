@@ -1,12 +1,12 @@
 package com.hardencode.test.filter;
 
 import android.content.Context;
-import android.media.Image;
 
 import com.hardencode.test.filter.impl.BaseImageFilter;
 import com.hardencode.test.filter.impl.BrightnessImageFilter;
 import com.hardencode.test.filter.impl.BulgeDistortionImageFilter;
 import com.hardencode.test.filter.impl.CGAColorSpaceImageFilter;
+import com.hardencode.test.filter.impl.twoinput.blend.ColorDodgeImageFilter;
 import com.hardencode.test.filter.impl.GrayScaleImageFilter;
 import com.hardencode.test.filter.impl.KuwaharaImageFilter;
 import com.hardencode.test.filter.impl.OpacityImageFilter;
@@ -25,6 +25,8 @@ import com.hardencode.test.filter.impl.colormatrix.SepiaImageFilter;
 import com.hardencode.test.filter.impl.twoinput.blend.AddBlendImageFilter;
 import com.hardencode.test.filter.impl.twoinput.blend.AlphaBlendImageFilter;
 import com.hardencode.test.filter.impl.twoinput.blend.ColorBlendImageFilter;
+import com.hardencode.test.filter.impl.twoinput.blend.ColorBurnImageFilter;
+import com.hardencode.test.filter.impl.twoinput.blend.DarkenBlendImageFilter;
 
 public class ImageFilterFactory {
     public BaseImageFilter getImageFilter(ImageFilter imageFilter, Context mContext)
@@ -72,6 +74,13 @@ public class ImageFilterFactory {
             return new AddBlendImageFilter(mContext);
         }else if(imageFilter == ImageFilter.COLORBLEND){
             return new ColorBlendImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.COLORBURN){
+            return new ColorBurnImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.COLORDODGE)
+        {
+            return new ColorDodgeImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.DARKEN){
+            return new DarkenBlendImageFilter(mContext);
         }else
 
         {
