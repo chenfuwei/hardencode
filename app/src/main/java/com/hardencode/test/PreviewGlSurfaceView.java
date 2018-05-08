@@ -43,6 +43,7 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
 
     private ImageFilterFactory factory;
     private BaseImageFilter baseImageFilter;
+    private BaseImageFilter defaultImageFilter;
 
     public PreviewGlSurfaceView(Context context) {
         this(context, null);
@@ -101,9 +102,11 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
         glViewRender.setShareEGLContext(EGL14.eglGetCurrentContext());
         glViewRender.onSurfaceCreated(viEncode.getEncodeSurface(), Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
 
-        baseImageFilter = factory.getImageFilter(ImageFilter.KUWAHARA, getContext());
-
+        baseImageFilter = factory.getImageFilter(ImageFilter.ALPHABLEND, getContext());
         baseImageFilter.onInputImageSizeChange(Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
+
+        defaultImageFilter = factory.getImageFilter(ImageFilter.DEFAULT, getContext());
+        defaultImageFilter.onInputImageSizeChange(Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
     }
 
     @Override
@@ -115,6 +118,7 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
         video2Render.onInputChange(width, height);
 
         baseImageFilter.onOutputSizeChange(width, height);
+        defaultImageFilter.onOutputSizeChange(width, height);
     }
 
     @Override
@@ -132,7 +136,7 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
 
         ByteBuffer vertexBuffer = OptionGlUtils.getDatasByteBuffer(OptionGlUtils.vertexs);
         ByteBuffer coordBuffer = OptionGlUtils.getDatasByteBuffer(OptionGlUtils.coordRotation90);
-        baseImageFilter.onDrawFrame(id,vertexBuffer,coordBuffer);
+        defaultImageFilter.onDrawFrame(id,vertexBuffer,coordBuffer);
 
 
         glViewRender.setmTexId(id);

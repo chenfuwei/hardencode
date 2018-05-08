@@ -147,6 +147,7 @@ public class BaseImageFilter {
         GLES20.glDisableVertexAttribArray(aCoordinate);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+        onDrawFrameLast();
         return saveTextureId;
     }
 
@@ -189,6 +190,11 @@ public class BaseImageFilter {
     protected void onDrawFramePre()
     {
         //子类实现
+    }
+
+    protected void onDrawFrameLast()
+    {
+
     }
 
     public void setProgressValue(float percent)

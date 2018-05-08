@@ -22,6 +22,7 @@ import com.hardencode.test.filter.impl.ContrastImageFilter;
 import com.hardencode.test.filter.impl.GammaImageFilter;
 import com.hardencode.test.filter.impl.HueImageFilter;
 import com.hardencode.test.filter.impl.colormatrix.SepiaImageFilter;
+import com.hardencode.test.filter.impl.twoinput.blend.AlphaBlendImageFilter;
 
 public class ImageFilterFactory {
     public BaseImageFilter getImageFilter(ImageFilter imageFilter, Context mContext)
@@ -63,6 +64,8 @@ public class ImageFilterFactory {
             return new OpacityImageFilter(mContext);
         }else if(imageFilter == ImageFilter.KUWAHARA){
             return new KuwaharaImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.ALPHABLEND){
+            return new AlphaBlendImageFilter(mContext);
         }else
 
         {
