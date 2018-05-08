@@ -24,6 +24,7 @@ import com.hardencode.test.filter.impl.HueImageFilter;
 import com.hardencode.test.filter.impl.colormatrix.SepiaImageFilter;
 import com.hardencode.test.filter.impl.twoinput.blend.AddBlendImageFilter;
 import com.hardencode.test.filter.impl.twoinput.blend.AlphaBlendImageFilter;
+import com.hardencode.test.filter.impl.twoinput.blend.ColorBlendImageFilter;
 
 public class ImageFilterFactory {
     public BaseImageFilter getImageFilter(ImageFilter imageFilter, Context mContext)
@@ -69,6 +70,8 @@ public class ImageFilterFactory {
             return new AlphaBlendImageFilter(mContext);
         }else if(imageFilter == ImageFilter.ADDBLEND){
             return new AddBlendImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.COLORBLEND){
+            return new ColorBlendImageFilter(mContext);
         }else
 
         {

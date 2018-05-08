@@ -6,7 +6,7 @@ public enum ImageFilter {
     SWIRL("Swirl"), WHITEBALANCE("wihtebalance"), BULGE("bulge distortion"), CGACOLOR("CGA color"),
     VIGNETTE("vignette"), TRANSFORM("transform"), SPHEREFRACTION("shpere refraction"),
     SHARPNESS("sharpness"), POSTERIZE("posterize"),OPACITY("opacity"), KUWAHARA("kuwahara"),
-    ALPHABLEND("alpha blend"), ADDBLEND("add blend");
+    ALPHABLEND("alpha blend"), ADDBLEND("add blend"), COLORBLEND("color blend");
 
     private String value;
 
