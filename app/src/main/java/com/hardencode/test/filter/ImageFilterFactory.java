@@ -6,6 +6,7 @@ import com.hardencode.test.filter.impl.BaseImageFilter;
 import com.hardencode.test.filter.impl.BrightnessImageFilter;
 import com.hardencode.test.filter.impl.BulgeDistortionImageFilter;
 import com.hardencode.test.filter.impl.CGAColorSpaceImageFilter;
+import com.hardencode.test.filter.impl.group.GaussianBlurImageFilter;
 import com.hardencode.test.filter.impl.group.SketchImageFilter;
 import com.hardencode.test.filter.impl.sample.ConvolutionImageFilter;
 import com.hardencode.test.filter.impl.sample.EmbossImageFilter;
@@ -99,6 +100,9 @@ public class ImageFilterFactory {
             return new EmbossImageFilter(mContext);
         }else if(imageFilter == ImageFilter.SKETCH){
             return new SketchImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.GAUSSIANBLUR){
+            return new GaussianBlurImageFilter(mContext);
+
         }else
 
         {

@@ -152,7 +152,7 @@ public class BaseImageFilter {
         return saveTextureId;
     }
 
-    private void runOnDrawTask()
+    protected void runOnDrawTask()
     {
         synchronized (runnables)
         {
@@ -162,7 +162,7 @@ public class BaseImageFilter {
         }
     }
 
-    protected void runOnDraw(Runnable runnable)
+    public void runOnDraw(Runnable runnable)
     {
         synchronized (runnables)
         {

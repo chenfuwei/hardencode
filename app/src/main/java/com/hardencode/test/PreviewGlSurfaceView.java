@@ -112,7 +112,7 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
 //        filtes.add(factory.getImageFilter(ImageFilter.EMBOSS, getContext()));
 //        ((BaseFilterGroup)baseImageFilter).setFilters(filtes);
 
-        baseImageFilter = factory.getImageFilter(ImageFilter.SKETCH, getContext());
+        baseImageFilter = factory.getImageFilter(ImageFilter.GAUSSIANBLUR, getContext());
 
         baseImageFilter.onInputImageSizeChange(Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
 

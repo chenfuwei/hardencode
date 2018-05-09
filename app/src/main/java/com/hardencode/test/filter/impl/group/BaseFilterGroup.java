@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseFilterGroup extends BaseImageFilter{
-    private List<BaseImageFilter> filters;
+    protected List<BaseImageFilter> filters;
 
     public BaseFilterGroup(Context mContext) {
         super(mContext);
@@ -61,6 +61,7 @@ public class BaseFilterGroup extends BaseImageFilter{
 
     @Override
     public int onDrawFrameToTexture(int glTexture) {
+        runOnDrawTask();
         if(null != filters && filters.size() > 0)
         {
             for(BaseImageFilter filter : filters)
