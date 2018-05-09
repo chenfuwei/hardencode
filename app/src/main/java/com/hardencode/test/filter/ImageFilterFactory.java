@@ -6,6 +6,9 @@ import com.hardencode.test.filter.impl.BaseImageFilter;
 import com.hardencode.test.filter.impl.BrightnessImageFilter;
 import com.hardencode.test.filter.impl.BulgeDistortionImageFilter;
 import com.hardencode.test.filter.impl.CGAColorSpaceImageFilter;
+import com.hardencode.test.filter.impl.sample.LapulacianImageFilter;
+import com.hardencode.test.filter.impl.sample.ToneImageFilter;
+import com.hardencode.test.filter.impl.sample.WeakPixelInclusionImageFilter;
 import com.hardencode.test.filter.impl.twoinput.blend.ColorDodgeImageFilter;
 import com.hardencode.test.filter.impl.GrayScaleImageFilter;
 import com.hardencode.test.filter.impl.KuwaharaImageFilter;
@@ -81,6 +84,12 @@ public class ImageFilterFactory {
             return new ColorDodgeImageFilter(mContext);
         }else if(imageFilter == ImageFilter.DARKEN){
             return new DarkenBlendImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.WEAKPIXEL){
+            return new WeakPixelInclusionImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.TONE){
+            return new ToneImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.LAPULACIAN){
+            return new LapulacianImageFilter(mContext);
         }else
 
         {
