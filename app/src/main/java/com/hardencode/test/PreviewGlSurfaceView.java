@@ -18,8 +18,11 @@ import com.hardencode.test.filter.ImageFilter;
 import com.hardencode.test.filter.ImageFilterFactory;
 import com.hardencode.test.filter.OptionGlUtils;
 import com.hardencode.test.filter.impl.BaseImageFilter;
+import com.hardencode.test.filter.impl.group.BaseFilterGroup;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.microedition.khronos.egl.EGL;
 import javax.microedition.khronos.egl.EGL10;
@@ -44,6 +47,7 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
     private ImageFilterFactory factory;
     private BaseImageFilter baseImageFilter;
     private BaseImageFilter defaultImageFilter;
+
 
     public PreviewGlSurfaceView(Context context) {
         this(context, null);
@@ -102,7 +106,14 @@ public class PreviewGlSurfaceView extends GLSurfaceView implements GLSurfaceView
         glViewRender.setShareEGLContext(EGL14.eglGetCurrentContext());
         glViewRender.onSurfaceCreated(viEncode.getEncodeSurface(), Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
 
-        baseImageFilter = factory.getImageFilter(ImageFilter.EMBOSS, getContext());
+//        baseImageFilter = new BaseFilterGroup(getContext());
+//        List<BaseImageFilter> filtes = new ArrayList<BaseImageFilter>();
+//        filtes.add(factory.getImageFilter(ImageFilter.ALPHABLEND, getContext()));
+//        filtes.add(factory.getImageFilter(ImageFilter.EMBOSS, getContext()));
+//        ((BaseFilterGroup)baseImageFilter).setFilters(filtes);
+
+        baseImageFilter = factory.getImageFilter(ImageFilter.SKETCH, getContext());
+
         baseImageFilter.onInputImageSizeChange(Config.VIDEO_WIDTH, Config.VIDEO_HEIGHT);
 
         defaultImageFilter = factory.getImageFilter(ImageFilter.DEFAULT, getContext());

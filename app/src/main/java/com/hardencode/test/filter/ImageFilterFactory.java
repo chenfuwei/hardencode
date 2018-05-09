@@ -6,6 +6,7 @@ import com.hardencode.test.filter.impl.BaseImageFilter;
 import com.hardencode.test.filter.impl.BrightnessImageFilter;
 import com.hardencode.test.filter.impl.BulgeDistortionImageFilter;
 import com.hardencode.test.filter.impl.CGAColorSpaceImageFilter;
+import com.hardencode.test.filter.impl.group.SketchImageFilter;
 import com.hardencode.test.filter.impl.sample.ConvolutionImageFilter;
 import com.hardencode.test.filter.impl.sample.EmbossImageFilter;
 import com.hardencode.test.filter.impl.sample.LapulacianImageFilter;
@@ -96,6 +97,8 @@ public class ImageFilterFactory {
             return new ConvolutionImageFilter(mContext);
         }else if(imageFilter == ImageFilter.EMBOSS){
             return new EmbossImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.SKETCH){
+            return new SketchImageFilter(mContext);
         }else
 
         {

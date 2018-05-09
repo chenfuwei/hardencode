@@ -8,7 +8,7 @@ public enum ImageFilter {
     SHARPNESS("sharpness"), POSTERIZE("posterize"),OPACITY("opacity"), KUWAHARA("kuwahara"),
     ALPHABLEND("alpha blend"), ADDBLEND("add blend"), COLORBLEND("color blend"), COLORBURN("color burn"),
     COLORDODGE("color dodge"), DARKEN("darken"), WEAKPIXEL("weak pixel"), TONE("tone"), LAPULACIAN("lapulacian"),
-    CONVOLUTION("convolution"), EMBOSS("emboss");
+    CONVOLUTION("convolution"), EMBOSS("emboss"), SKETCH("sketch");
 
     private String value;
 

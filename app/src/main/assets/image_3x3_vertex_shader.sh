@@ -1,9 +1,10 @@
 attribute vec3 aPosition;
 attribute vec2 aCoordinate;
-varying vec2 aVaryCoordinate;
 
 uniform float widthTexel;
 uniform float heightTexel;
+
+varying vec2 aVaryCoordinate;
 
 varying vec2 textureCoord;
 varying vec2 leftTextureCoord;

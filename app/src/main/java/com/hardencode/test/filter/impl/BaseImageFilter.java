@@ -202,4 +202,16 @@ public class BaseImageFilter {
     {
 
     }
+
+    public int getProgram() {
+        return mProgram;
+    }
+
+    public int getInputImageWidth() {
+        return nInputImageWidth;
+    }
+
+    public int getInputImageHeight() {
+        return nInputImageHeight;
+    }
 }
