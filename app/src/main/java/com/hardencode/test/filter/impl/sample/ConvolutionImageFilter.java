@@ -30,4 +30,14 @@ public class ConvolutionImageFilter extends Image3x3TextureSampingFilter{
             }
         });
     }
+
+    public void setMat9(final float[] mat9) {
+        this.mat9 = mat9;
+        runOnDraw(new Runnable() {
+            @Override
+            public void run() {
+                GLES20.glUniformMatrix3fv(mFactorLocation, 1, false, mat9, 0);
+            }
+        });
+    }
 }

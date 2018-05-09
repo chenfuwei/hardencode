@@ -7,6 +7,7 @@ import com.hardencode.test.filter.impl.BrightnessImageFilter;
 import com.hardencode.test.filter.impl.BulgeDistortionImageFilter;
 import com.hardencode.test.filter.impl.CGAColorSpaceImageFilter;
 import com.hardencode.test.filter.impl.sample.ConvolutionImageFilter;
+import com.hardencode.test.filter.impl.sample.EmbossImageFilter;
 import com.hardencode.test.filter.impl.sample.LapulacianImageFilter;
 import com.hardencode.test.filter.impl.sample.ToneImageFilter;
 import com.hardencode.test.filter.impl.sample.WeakPixelInclusionImageFilter;
@@ -93,6 +94,8 @@ public class ImageFilterFactory {
             return new LapulacianImageFilter(mContext);
         }else if(imageFilter == ImageFilter.CONVOLUTION){
             return new ConvolutionImageFilter(mContext);
+        }else if(imageFilter == ImageFilter.EMBOSS){
+            return new EmbossImageFilter(mContext);
         }else
 
         {
