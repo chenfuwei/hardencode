@@ -1,10 +1,13 @@
 package com.hardencode.test.encode.gl;
 
 import android.graphics.Bitmap;
+import android.graphics.Path;
 import android.opengl.EGLConfig;
 import android.opengl.GLES20;
 import android.os.Environment;
 import android.util.Log;
+
+import com.hardencode.test.filter.OptionGlUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,11 +30,11 @@ public class GlEncodeVideoRender implements GlRender{
     private int[] textureBuffer = new int[1];
 
     private static final String VERTEX_FRAGMENT = "" +
-            "attribute vec2 aPosition;" + "\n"+
+            "attribute vec3 aPosition;" + "\n"+
             "attribute vec2 aTexCoord;" + "\n"+
             "varying vec2 aVaryingTexCoord;" + "\n" +
             "void main(){"+"\n"+
-            "gl_Position = vec4(aPosition, 0.0, 1.0);" + "\n" +
+            "gl_Position = vec4(aPosition, 1.0);" + "\n" +
             "aVaryingTexCoord = aTexCoord;" + "\n" +
             "}";
     private static final String FRAG_FRAGMENT = "" +
@@ -42,27 +45,6 @@ public class GlEncodeVideoRender implements GlRender{
             "gl_FragColor = texture2D(sTexture, aVaryingTexCoord);" + "\n" +
             "}";
 
-    private float[] vertexs = new float[]{
-            -1.0f, -1.0f,
-            1.0f, -1.0f,
-            -1.0f, 1.0f,
-            1.0f, 1.0f
-
-    };
-
-    private float[] texCoord = new float[]{
-//            0.0f, 0.0f,
-//            0.0f, 1.0f,
-//            1.0f, 0.0f,
-//            1.0f, 1.0f
-
-
-            0.0f, 1.0f,
-            1.0f, 1.0f,
-            0.0f, 0.0f,
-            1.0f, 0.0f
-    };
-
     public void onSurfaceCreated(EGLConfig config) {
         int vertexShader = loadSharder(VERTEX_FRAGMENT, GLES20.GL_VERTEX_SHADER);
         int fragShader = loadSharder(FRAG_FRAGMENT, GLES20.GL_FRAGMENT_SHADER);
@@ -70,18 +52,20 @@ public class GlEncodeVideoRender implements GlRender{
         aPosition = GLES20.glGetAttribLocation(program, "aPosition");
         aTexCoord = GLES20.glGetAttribLocation(program, "aTexCoord");
 
-        vertexBuffer = ByteBuffer.allocateDirect(vertexs.length * 4);
-        vertexBuffer.order(ByteOrder.nativeOrder());
-        FloatBuffer buffer = vertexBuffer.asFloatBuffer();
-        buffer.put(vertexs);
-        vertexBuffer.position(0);
+//        vertexBuffer = ByteBuffer.allocateDirect(vertexs.length * 4);
+//        vertexBuffer.order(ByteOrder.nativeOrder());
+//        FloatBuffer buffer = vertexBuffer.asFloatBuffer();
+//        buffer.put(vertexs);
+//        vertexBuffer.position(0);
+        vertexBuffer = OptionGlUtils.getDatasByteBuffer(OptionGlUtils.vertexs);
+        float[] coords = OptionGlUtils.getDatasByteBuffer(OptionGlUtils.coordRotation90, false, false);
+        texBuffer = OptionGlUtils.getDatasByteBuffer(coords);
 
-
-        texBuffer = ByteBuffer.allocateDirect(texCoord.length * 4);
-        texBuffer.order(ByteOrder.nativeOrder());
-        FloatBuffer buffer1 = texBuffer.asFloatBuffer();
-        buffer1.put(texCoord);
-        texBuffer.position(0);
+//        texBuffer = ByteBuffer.allocateDirect(texCoord.length * 4);
+//        texBuffer.order(ByteOrder.nativeOrder());
+//        FloatBuffer buffer1 = texBuffer.asFloatBuffer();
+//        buffer1.put(texCoord);
+//        texBuffer.position(0);
     }
 
 
@@ -93,7 +77,7 @@ public class GlEncodeVideoRender implements GlRender{
     public void onDrawFrame(int mTexId) {
         GLES20.glUseProgram(program);
         GLES20.glEnableVertexAttribArray(aPosition);
-        GLES20.glVertexAttribPointer(aPosition, 2, GLES20.GL_FLOAT, false, 2 * 4, vertexBuffer);
+        GLES20.glVertexAttribPointer(aPosition, 3, GLES20.GL_FLOAT, false, 3 * 4, vertexBuffer);
         GLES20.glVertexAttribPointer(aTexCoord, 2, GLES20.GL_FLOAT, false, 2 * 4, texBuffer);
         GLES20.glEnableVertexAttribArray(aTexCoord);
 

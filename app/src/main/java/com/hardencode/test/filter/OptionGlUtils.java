@@ -31,6 +31,13 @@ public class OptionGlUtils {
             1.0f, 1.0f
     };
 
+    public static float[] getCoordRotation180 = new float[]{
+            1.0f, 0.0f,
+            0.0f, 0.0f,
+            1.0f, 1.0f,
+            0.0f, 1.0f
+    };
+
     public static float[] coordRotation270 = new float[]{
             1.0f, 1.0f,
             1.0f, 0.0f,
@@ -46,6 +53,40 @@ public class OptionGlUtils {
         floatBuffer.put(vertexs);
         byteBuffer.position(0);
         return byteBuffer;
+    }
+
+    public static float[] getDatasByteBuffer(float[] vertexs, boolean isFlipHorizontal, boolean isFlipVertical)
+    {
+        float[] tmpVertexs = new float[vertexs.length];
+        for(int i = 0; i < vertexs.length; i++){
+            tmpVertexs[i] = vertexs[i];
+        }
+
+        if(isFlipHorizontal)
+        {
+            tmpVertexs[0] = flip(tmpVertexs[0]);
+            tmpVertexs[2] = flip(tmpVertexs[2]);
+            tmpVertexs[4] = flip(tmpVertexs[4]);
+            tmpVertexs[6] = flip(tmpVertexs[6]);
+        }
+
+        if(isFlipVertical)
+        {
+            tmpVertexs[1] = flip(tmpVertexs[1]);
+            tmpVertexs[3] = flip(tmpVertexs[3]);
+            tmpVertexs[5] = flip(tmpVertexs[5]);
+            tmpVertexs[7] = flip(tmpVertexs[7]);
+        }
+        return tmpVertexs;
+    }
+
+    private static float flip(float value)
+    {
+        if(value == 0.0f)
+        {
+            return 1.0f;
+        }
+        return 0.0f;
     }
 
     public static int loadBitamp(Bitmap bitmap)
